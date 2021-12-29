@@ -1,0 +1,26 @@
+.header {
+    padding: 1rem ;
+    font-size: 1.25rem;
+
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__title {
+        font-weight: bold;
+    }
+
+    &__link {
+        color: #000;
+        transition: all 0.25s ease-in-out 0s;
+        text-decoration: none;
+
+        &--active,
+        &:hover {
+            text-decoration: none;
+            color: rgb(11, 159, 185);
+        }
+    }
+}
