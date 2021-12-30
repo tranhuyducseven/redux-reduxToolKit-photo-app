@@ -8,7 +8,7 @@ function InputField(props) {
         type, label, placeholder, disabled, } = props;
 
     const { name, value, onChange, onBlur } = field;
-    //Mot file co 4 cai qtr: name, value, onChange, onBlur
+    //Mot field co 4 cai qtr: name, value, onChange, onBlur
     return (
         <FormGroup>
             {label && <Label for={name}>{label}</Label>}

@@ -1,4 +1,3 @@
-import { PHOTO_CATEGORY_OPTIONS } from 'constants/global';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Select from 'react-select';
