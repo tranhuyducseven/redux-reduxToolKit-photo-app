@@ -91,3 +91,8 @@ RandomPhotoField
 Formik
 
 Yup
+
+
+### Redux toolkit
+1. Setup todo slice (createSlice)
+2. 
