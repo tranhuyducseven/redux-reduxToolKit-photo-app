@@ -7,7 +7,7 @@ function AddEditPage(props) {
         <div className="photo-edit">
             <Banner title="Pick your amazing photos" />
             <div className="photo-edit__form">
-                <PhotoForm onSubmit={value => console.log("Form-submit: ", value)} />
+                <PhotoForm  onSubmit={console.log('afdfj')} />
             </div>
 
         </div>

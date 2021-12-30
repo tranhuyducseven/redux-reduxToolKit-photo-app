@@ -1,14 +1,13 @@
 import { PHOTO_CATEGORY_OPTIONS } from 'constants/global';
-import Images from 'constants/images';
 import InputField from 'custom-fields/InputField';
 import RandomPhotoField from 'custom-fields/RandomPhotoField';
 import SelectField from 'custom-fields/SelectField';
-import { Formik, Form, FastField } from 'formik';
+import { FastField, Form, Formik } from 'formik';
 import PropTypes from 'prop-types';
 import React from 'react';
-
-import { Button, FormGroup, Input, Label } from 'reactstrap';
-
+import { Button, FormGroup } from 'reactstrap';
+import * as Yup from 'yup';
+import './PhotoForm.scss';
 
 PhotoForm.propTypes = {
     onSubmit: PropTypes.func,
@@ -19,22 +18,34 @@ PhotoForm.defaultProps = {
 }
 
 function PhotoForm(props) {
+    
+    const validationSchema = Yup.object().shape({
+        title: Yup.string().required('This field is required'),
+        categoryId: Yup.number().required('This field is required').nullable(),
+        photo: Yup.string().when('categoryId', {
+            is: 1,
+            then: Yup.string().required('This field is required'),
+            otherwise:Yup.string().notRequired(),
+          })
 
+    })
     const initialValues = {
         title: '',
         categoryId: null,
+        photo: '',
 
     };
     return (
         <Formik
             initialValues={initialValues}
+            validationSchema={validationSchema}
         >
 
             {formikProps => {
                 const { values, errors, touched } = formikProps;
                 console.log({ values, errors, touched })
                 return (
-                    <Form style={{ "margin": "50px" }}>
+                    <Form  style={{ "margin": "50px" }}>
                         <FastField
                             name="title"
                             component={InputField}
@@ -54,17 +65,14 @@ function PhotoForm(props) {
                             name="photo"
                             component={RandomPhotoField}
 
-                            label="photo"
+                            label="Photo"
 
                         />
-
-
-
-
-
                         <FormGroup>
-                            <Button color="primary">Add to album</Button>
+                            <Button type="submit" color="primary">Add to album</Button>
                         </FormGroup>
+
+
                     </Form>
                 )
             }}
