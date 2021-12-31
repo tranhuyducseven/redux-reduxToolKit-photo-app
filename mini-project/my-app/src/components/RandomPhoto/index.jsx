@@ -3,9 +3,9 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import './RandomPhoto.scss';
 
-const getRandomImageUrl = () =>{
-    const randomId = Math.trunc(Math.random() *200);
-    return `https://picsum.photos/id/${randomId}/200/300`
+const getRandomImageUrl = () => {
+    const randomId = Math.trunc(Math.random() * 200);
+    return `https://picsum.photos/id/${randomId}/200/200`
 }
 
 //1. name 
@@ -14,9 +14,9 @@ const getRandomImageUrl = () =>{
 //4. onBlur   
 
 function RandomPhoto(props) {
-    const {name, imageUrl, onImageUrlChange,  onRandomButtonBlur} = props;
+    const { name, imageUrl, onImageUrlChange, onRandomButtonBlur } = props;
     const handleRandomPhotoClick = async () => {
-        if(onImageUrlChange){
+        if (onImageUrlChange) {
             const randomImageUrl = getRandomImageUrl();
             onImageUrlChange(randomImageUrl);
         }
@@ -36,7 +36,13 @@ function RandomPhoto(props) {
             </div>
 
             <div className="random-photo__photo">
-                {imageUrl && <img src={imageUrl} alt="Oops ... not found. Please click random again!" />}
+                {imageUrl &&
+                    <img
+                        src={imageUrl}
+                        alt="Oops ... not found. Please click random again!"
+                        onError={handleRandomPhotoClick}
+                    />
+                }
             </div>
         </div>
     );
@@ -50,7 +56,7 @@ RandomPhoto.propTypes = {
     onRandomButtonBlur: PropTypes.func,
 }
 RandomPhoto.defaultProps = {
-    name: '', 
+    name: '',
     imageUrl: '',
     onImageUrlChange: null,
     onRandomButtonBlur: null,

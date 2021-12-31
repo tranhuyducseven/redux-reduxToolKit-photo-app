@@ -6,7 +6,13 @@ import { Button } from 'reactstrap';
 
 
 function PhotoCard(props) {
-    const { photo } = props;
+    const { photo, onPhotoCardEdit, onPhotoCardRemove } = props;
+    const handleEditClick = () => {
+        if (onPhotoCardEdit) onPhotoCardEdit(photo);
+    }
+    const handleRemoveClick = () => {
+        if (onPhotoCardRemove) onPhotoCardRemove(photo);
+    }
     return (
         <div className="photo">
             <img src={photo.photo} alt={photo.title} />
@@ -14,12 +20,12 @@ function PhotoCard(props) {
                 <h3 className="photo__title">{photo.title}</h3>
                 <div className="photo__actions">
                     <div>
-                        <Button outline size="sm" color="light">
+                        <Button onClick={handleEditClick} outline size="sm" color="light">
                             Edit
                         </Button>
                     </div>
                     <div>
-                        <Button outline size="sm" color="danger">
+                        <Button onClick={handleRemoveClick} outline size="sm" color="danger">
                             Remove
                         </Button>
                     </div>
@@ -31,9 +37,13 @@ function PhotoCard(props) {
 
 PhotoCard.propTypes = {
     photo: PropTypes.object,
+    onPhotoCardEdit: PropTypes.func,
+    onPhotoCardRemove: PropTypes.func,
 }
 PhotoCard.defaultProps = {
-    photo: {}
+    photo: {},
+    onPhotoCardEdit: null,
+    onPhotoCardRemove: null,
 }
 
 export default PhotoCard
